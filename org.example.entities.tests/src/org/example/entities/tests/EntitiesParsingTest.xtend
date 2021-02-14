@@ -20,11 +20,27 @@ class EntitiesParsingTest {
 	ParseHelper<Model> parseHelper
 
 	@Test
-	def loadModel() {
+	def attayWithDefaultSize() {
 		val result = parseHelper.parse('''
+			entity Person {
+			}
 			entity Company {
-				Person[] employees;
-				CEO ceo;
+				Person[ ] employees;
+			}
+		''')
+		assertNotNull(result)
+
+		val errors = result.eResource.errors
+		assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+	}
+
+	@Test
+	def arrayWithSize() {
+		val result = parseHelper.parse('''
+			entity Person {
+			}
+			entity Company {
+				Person[42] employees;
 			}
 		''')
 		assertNotNull(result)

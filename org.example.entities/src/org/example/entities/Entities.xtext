@@ -12,6 +12,6 @@ Entity:
 
 Attribute:
 	type = [Entity]
-	array ?= ('[]')?
+	(array ?= '[' (size=INT)? ']')?
 	name=ID ';'
 ;
