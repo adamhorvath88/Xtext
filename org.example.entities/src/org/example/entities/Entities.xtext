@@ -11,7 +11,22 @@ Entity:
 ;
 
 Attribute:
-	type = [Entity]
-	(array ?= '[' (size=INT)? ']')?
+	type = AttributeType
 	name=ID ';'
+;
+
+AttributeType:
+	elementType=ElementType (array ?= '[' (size=INT)? ']')?
+;
+
+ElementType:
+	BasicType | EntityType
+;
+
+BasicType:
+	typeName = ('string' | 'int' | 'boolean')
+;
+
+EntityType:
+	entity=[Entity]
 ;

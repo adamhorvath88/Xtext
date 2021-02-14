@@ -48,4 +48,39 @@ class EntitiesParsingTest {
 		val errors = result.eResource.errors
 		assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 	}
+
+	@Test
+	def basicTypesEntity() {
+		val result = parseHelper.parse('''
+			entity Account {
+				int id;
+				boolean verified;
+				string username;
+			}
+		''')
+		assertNotNull(result)
+
+		val errors = result.eResource.errors
+		assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+	}
+
+	@Test
+	def mixedTypesEntity() {
+		val result = parseHelper.parse('''
+			entity Account {
+				int id;
+				boolean verified;
+				string username;
+			}
+			entity System {
+				Account[] accounts;
+				string name;
+				boolean test;
+			}
+		''')
+		assertNotNull(result)
+
+		val errors = result.eResource.errors
+		assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+	}
 }
